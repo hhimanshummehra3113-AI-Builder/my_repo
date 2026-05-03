@@ -1,0 +1,89 @@
+# Banking CRM Agentic AI - Python Dependencies
+# Python 3.13.7+
+# Install: pip install -r requirements.txt
+
+# ============================================================================
+# Core Framework & Web Server
+# ============================================================================
+fastapi==0.109.0              # Modern Python web framework for APIs
+uvicorn==0.27.0               # ASGI server to run FastAPI
+pydantic==2.5.0               # Data validation using Python type hints
+
+# ============================================================================
+# LLM & AI Frameworks
+# ============================================================================
+langchain==0.0.352            # LLM orchestration and chains
+langchain-core==0.1.8         # Core components for LangChain
+langchain-community==0.0.8    # Community integrations
+langgraph==0.2.0              # Graph-based state management for agents
+ollama-python==0.1.0          # Ollama Python client (if available)
+
+# Note: Ollama itself must be installed separately from https://ollama.ai
+
+# ============================================================================
+# Database & ORM
+# ============================================================================
+pg8000==1.31.1                # Pure Python PostgreSQL driver (no system deps)
+sqlalchemy==2.0.23            # SQL toolkit and ORM
+psycopg2-binary==2.9.9        # PostgreSQL adapter (alternative if pg8000 fails)
+
+# ============================================================================
+# Data Processing & Type Handling
+# ============================================================================
+pydantic-settings==2.1.0      # Settings management with Pydantic
+python-dateutil==2.8.2        # Date/time utilities
+pytz==2023.3                  # Timezone definitions
+
+# ============================================================================
+# HTTP & API Clients
+# ============================================================================
+httpx==0.25.2                 # Modern HTTP client
+requests==2.31.0              # HTTP library for Python
+aiohttp==3.9.1                # Async HTTP client/server
+
+# ============================================================================
+# Utilities & Helpers
+# ============================================================================
+python-dotenv==1.0.0          # Load environment variables
+pydantic-extra-types==2.2.0   # Extra types for Pydantic
+typing-extensions==4.8.0      # Backported typing features
+
+# ============================================================================
+# Development & Debugging (Optional)
+# ============================================================================
+# pytest==7.4.3                # Testing framework
+# pytest-cov==4.1.0            # Coverage reporting
+# black==23.11.0               # Code formatter
+# flake8==6.1.0                # Code linter
+# mypy==1.7.1                  # Static type checker
+# ipython==8.18.1              # Interactive Python shell
+
+# ============================================================================
+# Logging & Monitoring (Optional)
+# ============================================================================
+# python-json-logger==2.0.7    # JSON logging
+# prometheus-client==0.19.0    # Prometheus metrics
+
+# ============================================================================
+# Production Deployment (Optional)
+# ============================================================================
+# gunicorn==21.2.0             # Production WSGI server
+# docker==6.1.0                # Docker client library
+
+# ============================================================================
+# Notes
+# ============================================================================
+# 1. All versions are pinned for reproducibility
+# 2. pg8000 is pure Python - works on Windows without system dependencies
+# 3. Ollama must be installed separately from https://ollama.ai
+# 4. PostgreSQL 17+ required for database
+# 5. Python 3.13.7+ recommended for latest features
+#
+# Installation:
+#   pip install -r requirements.txt
+#
+# Verification:
+#   python -c "import fastapi, langchain, langgraph, pg8000; print('OK')"
+#
+# Updates:
+#   pip install -U -r requirements.txt

@@ -1,0 +1,464 @@
+{
+  "info": {
+    "_postman_id": "banking-crm-mcp-v1",
+    "name": "Banking CRM MCP Server",
+    "description": "Collection for testing Banking CRM MCP Server tools",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health & Status",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["health"]
+            },
+            "description": "Check if server is running"
+          },
+          "response": []
+        },
+        {
+          "name": "Server Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["status"]
+            },
+            "description": "Check database connection and available tools"
+          },
+          "response": []
+        },
+        {
+          "name": "Root Info",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": [""]
+            },
+            "description": "Get API information and available endpoints"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "MCP Tools",
+      "item": [
+        {
+          "name": "List All Tools",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/mcp/tools",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["mcp", "tools"]
+            },
+            "description": "Get list of all available MCP tools"
+          },
+          "response": []
+        },
+        {
+          "name": "Call Tool via MCP/Call",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tool\": \"get_customer_profile\",\n  \"params\": {\n    \"customer_id\": 1\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/mcp/call",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["mcp", "call"]
+            },
+            "description": "Call any tool using /mcp/call endpoint"
+          },
+          "response": []
+        },
+        {
+          "name": "Call Tool by Name",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/mcp/tools/calculate_conversion_score",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["mcp", "tools", "calculate_conversion_score"]
+            },
+            "description": "Call tool directly by name in URL"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Customer Profile",
+      "item": [
+        {
+          "name": "Get Customer Profile (Tool)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tool\": \"get_customer_profile\",\n  \"params\": {\n    \"customer_id\": 1\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/mcp/call",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["mcp", "call"]
+            },
+            "description": "Fetch customer profile via tool"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Customer Profile (Direct)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/crm/customers/1/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["crm", "customers", "1", "profile"]
+            },
+            "description": "Fetch customer profile via convenience endpoint"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Transaction Analysis",
+      "item": [
+        {
+          "name": "Analyze Transactions (Tool)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tool\": \"analyze_transactions\",\n  \"params\": {\n    \"customer_id\": 1,\n    \"months\": 6\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/mcp/call",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["mcp", "call"]
+            },
+            "description": "Analyze customer transactions via tool"
+          },
+          "response": []
+        },
+        {
+          "name": "Analyze Transactions (Direct)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/crm/customers/1/transactions?months=6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["crm", "customers", "1", "transactions"],
+              "query": [
+                {
+                  "key": "months",
+                  "value": "6"
+                }
+              ]
+            },
+            "description": "Analyze transactions via convenience endpoint"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Conversion Score",
+      "item": [
+        {
+          "name": "Calculate Conversion Score (Tool)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tool\": \"calculate_conversion_score\",\n  \"params\": {\n    \"customer_id\": 1\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/mcp/call",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["mcp", "call"]
+            },
+            "description": "Calculate conversion score via tool"
+          },
+          "response": []
+        },
+        {
+          "name": "Calculate Conversion Score (Direct)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/crm/customers/1/score",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["crm", "customers", "1", "score"]
+            },
+            "description": "Get conversion score via convenience endpoint"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product Recommendations",
+      "item": [
+        {
+          "name": "Get Recommendations (Tool)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tool\": \"get_recommended_products\",\n  \"params\": {\n    \"customer_id\": 1\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/mcp/call",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["mcp", "call"]
+            },
+            "description": "Get recommended products via tool"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Recommendations (Direct)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/crm/customers/1/recommendations",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["crm", "customers", "1", "recommendations"]
+            },
+            "description": "Get product recommendations via convenience endpoint"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Message Generation",
+      "item": [
+        {
+          "name": "Generate Message (Tool)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tool\": \"generate_outreach_message\",\n  \"params\": {\n    \"customer_id\": 1,\n    \"product_id\": 1\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/mcp/call",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["mcp", "call"]
+            },
+            "description": "Generate outreach message via tool"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Message (Direct)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/crm/customers/1/message?product_id=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["crm", "customers", "1", "message"],
+              "query": [
+                {
+                  "key": "product_id",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Generate message via convenience endpoint"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Prospects",
+      "item": [
+        {
+          "name": "Identify High-Value Prospects (Tool)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tool\": \"identify_high_value_prospects\",\n  \"params\": {}\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/mcp/call",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["mcp", "call"]
+            },
+            "description": "Identify high-value prospects via tool"
+          },
+          "response": []
+        },
+        {
+          "name": "Identify High-Value Prospects (Direct)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/crm/prospects",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["crm", "prospects"]
+            },
+            "description": "Get high-value prospects via convenience endpoint"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Complete Analysis",
+      "item": [
+        {
+          "name": "Complete Customer Analysis",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/crm/customers/1/complete-analysis",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["crm", "customers", "1", "complete-analysis"]
+            },
+            "description": "Get complete analysis (profile + transactions + score + recommendations)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Workflows",
+      "item": [
+        {
+          "name": "Outreach Campaign Workflow",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/crm/workflow/outreach-campaign",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["crm", "workflow", "outreach-campaign"]
+            },
+            "description": "Run complete outreach campaign workflow (identify → analyze → score → generate messages)"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
